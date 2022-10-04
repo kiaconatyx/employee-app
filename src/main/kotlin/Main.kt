@@ -14,8 +14,17 @@ val cycleToWorkMonthlyDeduction = 54.33
 var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
 
+val logger = KotlinLogging.logger {}
+val logger1 = KotlinLogging.logger1 {}
+val logger2 = KotlinLogging.logger2 {}
+val logger3 = KotlinLogging.logger3 {}
+
 
 fun main(args: Array<String>){
+    logger.info { "Launching Employee App" }
+    logger1.info { "Getting Things Ready" }
+    logger2.info { "Employee App Almost Launched" }
+    logger3.info { "Employee App Launched" }
     start()
 }
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
