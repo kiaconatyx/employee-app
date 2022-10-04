@@ -11,10 +11,12 @@ val payePercentage = 38.5
 val prsiPercentage = 5.2
 val annualBonus = 1450.50
 val cycleToWorkMonthlyDeduction = 54.33
+var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 
 fun main(args: Array<String>){
 
     var input : Int
+    add()
 
     do {
         input = menu()
@@ -48,10 +50,10 @@ fun menu() : Int {
     return readLine()!!.toInt()
 }
 
-fun getFullName() = when (gender){
-    'm', 'M' -> "Mr. $firstName $surname"
-    'f', 'F' -> "Ms. $firstName $surname"
-    else -> "$firstName $surname"
+fun getFullName() = when (employee.gender){
+    'm', 'M' -> "Mr. ${employee.firstName} ${employee.surname}"
+    'f', 'F' -> "Ms.  ${employee.firstName} ${employee.surname}"
+    else ->  "${employee.firstName} ${employee.surname}"
 }
 
 fun getMonthlySalary() = roundTwoDecimals(grossSalary / 12)
@@ -62,7 +64,7 @@ fun getTotalMonthlyDeductions() = roundTwoDecimals((getMonthlyPRSI() + getMonthl
 fun getNetMonthlyPay() = roundTwoDecimals(roundTwoDecimals(getGrossMonthlyPay() - getTotalMonthlyDeductions()))
 
 fun getPayslip() =
-        """
+    """
         ______________________________________________________________________
          Monthly Payslip:             ${getFullName()}, ID: $employeeID                  
         ______________________________________________________________________    
@@ -85,5 +87,25 @@ fun getPayslip() =
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 //fun roundTwoDecimals(number: Double) = "%.2f".format(number).toDouble()
 
+fun add()){
+    print("Enter first name: ")
+    val firstName = readLine().toString()
+    print("Enter surname: ")
+    val surname = readLine().toString()
+    print("Enter gender (m/f): ")
+    val gender = readLine()!!.toCharArray()[0]
+    print("Enter employee ID: ")
+    val employeeID = readLine()!!.toInt()
+    print("Enter gross salary: ")
+    val grossSalary = readLine()!!.toDouble()
+    print("Enter PAYE %: ")
+    val payePercentage = readLine()!!.toDouble()
+    print("Enter PRSI %: ")
+    val prsiPercentage = readLine()!!.toDouble()
+    print("Enter Annual Bonus: ")
+    val annualBonus= readLine()!!.toDouble()
+    print("Enter Cycle to Work Deduction: ")
+    val cycleToWorkMonthlyDeduction= readLine()!!.toDouble()
 
-
+    employee = Employee(firstName, surname, gender, employeeID, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction)
+}
