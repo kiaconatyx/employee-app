@@ -1,5 +1,7 @@
 package Controllers
 
+import ie.setu.Employee
+
 var lastId = 0
 
 internal fun getId(): Int {
