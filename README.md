@@ -7,11 +7,17 @@ Assinment 1 - Basic Kotlin Employee App.
 This app uses the Single Responsibility Principle
 
 
-Features
-Manage a single employee using employee model
-Manage employee list arrays with an EmployeeAPI class
-Work with user ID in main class (main.kt)
-Menu driven with basic CRUD functions (update)
-Kotlin Logging
-calculate individual sections of employee payslip
-Formatting with string templates
+Features:
+1. Manage a single employee using employee model 
+
+2. Manage employee list arrays with an EmployeeAPI class
+
+3. Work with user ID in main class (main.kt)
+
+4. Menu driven with basic CRUD functions (update)
+
+5. Kotlin Logging
+
+6. Calculate single sections of employee payslip
+
+7. Formatting with string templates
