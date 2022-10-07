@@ -16,9 +16,11 @@ val cycleToWorkMonthlyDeduction = 54.33
 var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
 
+
+//declare logger variable
 val logger = KotlinLogging.logger {}
 
-
+//logging notes appear on start up
 fun main(args: Array<String>){
     logger.info { "Launching Employee App" }
     logger.info { "Getting Things Ready" }
@@ -29,7 +31,7 @@ fun main(args: Array<String>){
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 //fun roundTwoDecimals(number: Double) = "%.2f".format(number).toDouble()
 
-
+//menu appears in console
 fun menu() : Int{
     print("""
          |Employee Menu
@@ -37,11 +39,13 @@ fun menu() : Int{
          |   2. List All Employees
          |   3. Search Employees
          |   4. Print Payslip for Employee
+         |   5. Delete an Employee
          |  -1. Exit
          |
          |Enter Option : """.trimMargin())
 return readLine()!!.toInt()
 }
+
 
 fun start() {
     var input: Int
@@ -53,6 +57,7 @@ fun start() {
             2 -> list()
             3 -> search()
             4 -> paySlip()
+            5 -> deleteEmp()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -60,6 +65,8 @@ fun start() {
         println()
     } while (input != -1)
 }
+
+//user can searh an employee
 fun search() {
     logger.info { "Starting search..." }
     val employee = getEmployeeById()
@@ -75,17 +82,22 @@ internal fun getEmployeeById(): Employee? {
     return employees.findOne(employeeID)
 }
 
+
 fun paySlip(){
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getPayslip())
 }
 
+
+//employee details to populate console
 fun dummyData() {
     employees.create(Employee("Joe", "Soap", 'm', 0, 35655.43, 31.0, 7.5, 2000.0, 25.6))
-    employees.create(Employee("Joan", "Murphy", 'f', 0, 54255.13, 32.5, 7.0, 1500.0, 55.3))
-    employees.create(Employee("Mary", "Quinn", 'f', 0, 75685.41, 40.0, 8.5, 4500.0, 0.0))
+    employees.create(Employee("Joan", "Murphy", 'f', 3, 54255.13, 32.5, 7.0, 1500.0, 55.3))
+    employees.create(Employee("Mary", "Quinn", 'f', 4, 75685.41, 40.0, 8.5, 4500.0, 0.0))
 }
+
+//Ask user to enter employee details in console
 fun add(){
     print("Enter first name: ")
     val firstName = readLine().toString()
@@ -106,9 +118,35 @@ fun add(){
 
     employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
 }
-
+//list out all employees
 fun list(){
     logger.info { "Listing Employees" }
     employees.findAll()
         .forEach{ println(it) }
+}
+
+//delete an employee
+fun deleteEmp(){
+    logger.info {"deleting Employee"}
+    println(list())
+    println("Enter the id")
+    val empId = readLine()!!.toInt()
+    employees.deleteEmp(empId)
+    println(list())
+
+
+
+}
+
+//update employee (not working)
+fun updateEmp(){
+    logger.info {"Update Employee Salary"}
+    println(list())
+    println("Enter the first name")
+    val empId = readLine()!!.toInt()
+    employees.deleteEmp(empId)
+    println(list())
+
+
+
 }
